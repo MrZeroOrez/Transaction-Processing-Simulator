@@ -73,7 +73,7 @@ See `LEARNING_GUIDE.md`, `API.md`, `MANUAL_TESTS.md`, and `VERIFICATION.md`. Rea
 
 ## Scope of this delivery
 
-End-to-end means the listed local UI, API, persistence, validation and tests are implemented. It does not mean production banking certification or every future feature. AWS/Render deployment, Kafka/outbox consumers, refresh-token rotation, password recovery/email verification, public-facing rate limits, MFA, admin roles, live data, distributed token revocation, monitoring dashboards and production disaster recovery are future work. No cloud resources are created and no paid subscriptions are configured. Database result sets are loaded for the local demo; pagination and filtering happen in React, not at SQL level.
+End-to-end means the listed local UI, API, persistence, validation and tests are implemented. It does not mean production banking certification or every future feature. Actual AWS/Render deployment, refresh-token rotation, password recovery/email verification, public-facing rate limits, MFA, admin roles, live data, distributed token revocation, monitoring dashboards and production disaster recovery are future work. No cloud resources are created and no paid subscriptions are configured. Database result sets are loaded for the local demo; pagination and filtering happen in React, not at SQL level.
 
 ## References
 
@@ -93,3 +93,7 @@ npm run test:e2e
 ```
 
 The test creates a new test user and demo records in your local database. It exercises the real UI/API/database flow and checks error handling, CSV download, refresh/login, logout and a narrow mobile layout. It does not clear existing users or records. The script takes a local screenshot in the OS temporary directory for diagnosis; no screenshot is uploaded. Optional environment variables: E2E_BASE_URL, PLAYWRIGHT_EXECUTABLE_PATH, E2E_SCREENSHOT. Browser download needs internet. The ZIP includes source and lockfiles; node_modules, compiled JARs and user databases are excluded.
+
+## Optional event pipeline and Render packaging
+
+See DEPLOYMENT.md. A transactional SQL outbox and optional Kafka producer/consumer are included. The consumer builds an idempotent event-metadata projection, not monetary balances. Kafka is disabled by default. Root Dockerfile serves the React build and API in one container; render.yaml declares a Free web service and prompts for external PostgreSQL credentials. No cloud deployment or broker is provisioned automatically.

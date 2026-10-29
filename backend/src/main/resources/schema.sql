@@ -7,3 +7,6 @@ CREATE INDEX IF NOT EXISTS transfers_target ON transfers(target_id,created_at);
 CREATE TABLE IF NOT EXISTS ledger(id VARCHAR(36) PRIMARY KEY,account_id VARCHAR(36) NOT NULL REFERENCES accounts(id),transfer_id VARCHAR(36) REFERENCES transfers(id),kind VARCHAR(20) NOT NULL,amount DECIMAL(19,2) NOT NULL,created_at VARCHAR(40) NOT NULL);
 CREATE INDEX IF NOT EXISTS ledger_account ON ledger(account_id,created_at);
 CREATE TABLE IF NOT EXISTS audit(id VARCHAR(36) PRIMARY KEY,owner_id VARCHAR(36) NOT NULL REFERENCES app_users(id),action VARCHAR(30) NOT NULL,resource_id VARCHAR(36) NOT NULL,created_at VARCHAR(40) NOT NULL);
+
+CREATE TABLE IF NOT EXISTS event_outbox(id VARCHAR(36) PRIMARY KEY,resource_id VARCHAR(36) NOT NULL,event_type VARCHAR(30) NOT NULL,sent BOOLEAN NOT NULL DEFAULT FALSE);
+CREATE TABLE IF NOT EXISTS processed_events(id VARCHAR(36) PRIMARY KEY,resource_id VARCHAR(36) NOT NULL,event_type VARCHAR(30) NOT NULL);

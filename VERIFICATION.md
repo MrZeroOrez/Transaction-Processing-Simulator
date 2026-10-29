@@ -15,3 +15,7 @@ Default versions: Spring Boot 4.1.2; Java release target 17 (tested on the envir
 Not executed here: Windows CMD launchers, Docker builds/Compose, PostgreSQL runtime, GitHub-hosted Actions, AWS/Render deployments, penetration tests, stress/soak tests, or a dependency vulnerability audit. Docker/CI files are supplied configuration, not evidence of a deployment. Native servers were launched directly during verification.
 
 Re-run the included tests on your machine and follow MANUAL_TESTS.md.
+
+## Event/deployment update — 29 October 2026
+
+Clean Maven package passed after adding the event pipeline: 16 total tests, zero failures/errors. Two new tests use a mocked KafkaTemplate to verify acknowledgement/failure outbox state and duplicate consumption. A live broker, PostgreSQL and cloud deployment have NOT been tested. New root Dockerfile/render.yaml are supplied setup, not proof of deployment.

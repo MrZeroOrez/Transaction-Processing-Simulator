@@ -176,6 +176,7 @@ public class TransferService {
         amount,
         t.createdAt());
     audit(owner, "TRANSFER_POSTED", t.id());
+    db.update("INSERT INTO event_outbox(id,resource_id,event_type,sent) VALUES(?,?,?,FALSE)",id(),t.id(),"TRANSFER_POSTED");
     return t;
   }
 

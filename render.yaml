@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: transaction-processing-simulator
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_ADDRESS
+        value: 0.0.0.0
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_USERNAME
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false
+      - key: KAFKA_ENABLED
+        value: "false"

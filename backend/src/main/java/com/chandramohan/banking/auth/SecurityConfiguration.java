@@ -77,7 +77,7 @@ public class SecurityConfiguration {
             a ->
                 a.requestMatchers(
                         HttpMethod.GET,
-                        "/actuator/health",
+                        "/", "/index.html", "/assets/**", "/favicon.ico", "/actuator/health",
                         "/api/v1/platform",
                         "/api/v1/demo/portfolio")
                     .permitAll()
