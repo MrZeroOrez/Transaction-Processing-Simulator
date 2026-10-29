@@ -1,0 +1,20 @@
+name: transaction-processing-simulator
+services:
+  backend:
+    build: ./backend
+    environment:
+      SERVER_ADDRESS: 0.0.0.0
+      PORT: 8080
+      DATABASE_URL: jdbc:h2:file:/app/data/lab;DB_CLOSE_ON_EXIT=FALSE
+    ports:
+      - "127.0.0.1:8081:8080"
+    volumes:
+      - lab-data:/app/data
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "127.0.0.1:4174:80"
+volumes:
+  lab-data:
